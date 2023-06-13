@@ -14,6 +14,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Reflection.Emit;
 using System.Security.Cryptography;
 using Npgsql;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Guna.Charts;
 
 namespace FIX_LOGIN_REGISTER
 {
@@ -24,6 +28,79 @@ namespace FIX_LOGIN_REGISTER
             InitializeComponent();
         }
 
+        public class User
+        {
+            public int id_user { get; set; }
+            public string username { get; set; }
+            public string role { get; set; }
+
+        }
+
+        private static RSA GenerateRsaKey(int keySizeInBits)
+        {
+            var rsa = RSA.Create();
+            rsa.KeySize = keySizeInBits;
+            return rsa;
+        }
+
+        public class TokenManager
+        {
+            private const string SecretKey = "mysecretkey";
+
+            public static string GenerateToken(User user)
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var rsaKey = GenerateRsaKey(2048);
+
+                var rsaParameters = rsaKey.ExportParameters(includePrivateParameters: false);
+                var rsaSecurityKey = new RsaSecurityKey(rsaParameters);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                new Claim(ClaimTypes.NameIdentifier, user.id_user.ToString()),
+                new Claim(ClaimTypes.Name, user.username),
+                new Claim(ClaimTypes.Role, user.role)
+                    }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new RsaSecurityKey(rsaKey), SecurityAlgorithms.RsaSha256)
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                return tokenHandler.WriteToken(token);
+            }
+
+            public static User ValidateToken(string token)
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var rsaKey = GenerateRsaKey(2048);
+
+                try
+                {
+                    tokenHandler.ValidateToken(token, new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new RsaSecurityKey(rsaKey),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ClockSkew = TimeSpan.Zero
+                    }, out SecurityToken validatedToken);
+
+                    var jwtToken = (JwtSecurityToken)validatedToken;
+                    var userId = int.Parse(jwtToken.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value);
+                    var username = jwtToken.Claims.First(x => x.Type == ClaimTypes.Name).Value;
+                    var role = jwtToken.Claims.First(x => x.Type == ClaimTypes.Role).Value;
+
+                    return new User { id_user = userId, username = username, role = role };
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -31,12 +108,14 @@ namespace FIX_LOGIN_REGISTER
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            textBox1.Height = 32;
+            textBox1.AutoSize = false;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            textBox2.Height = 32;
+            textBox2.AutoSize = false;
         }
 
         private void textBox1_Click(object sender, EventArgs e)
@@ -94,54 +173,120 @@ namespace FIX_LOGIN_REGISTER
             forgotpw1.Show();
             this.Hide();
         }
+        private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Sign_Up daftar = new Sign_Up();
+            daftar.Show();
+            this.Hide();
+        }
 
         public void guna2GradientTileButton1_Click(object sender, EventArgs e)
         {
 
-            try
+
+            using (NpgsqlConnection connection = new NpgsqlConnection("Host=localhost;Port=5432;Username=postgres;Password=;Database=jecation"))
             {
-                string username_akun = textBox1.Text;
+
+                string username = textBox1.Text;
                 string password = textBox2.Text;
                 string password_akun = GetSHA256Hash(password);
-                bool data = AuthenticateData(username_akun, password_akun);
-                bool name = AuthenticateUser(username_akun);
+                bool data = AuthenticateData(username, password_akun);
+                bool name = AuthenticateUser(username);
                 bool pass = AuthenticatePass(password_akun);
 
                 if (data)
                 {
-                    MessageBox.Show("Login Succesfull");
+                    connection.Open();
+                    string query = "select * from akun where username_akun = @username and password_akun = @password";
+                    using (var command = new NpgsqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Username", username);
+                        command.Parameters.AddWithValue("@Password", password_akun);
 
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Jika login berhasil, buat objek User dan token
+                                User user = new User
+                                {
+                                    id_user = (int)reader["id_akun"],
+                                    username = (string)reader["username_akun"],
+                                    role = (string)reader["role"]
+                                };
+
+                                string token = TokenManager.GenerateToken(user);
+
+                                // Simpan token di session atau tempat penyimpanan yang sesuai
+                                MessageBox.Show("Login successfull");
+                                if (user.role == "admin")
+                                {
+                                    // Tampilkan form admin
+                                    Form3 adminForm = new Form3(user);
+                                    adminForm.Show();
+                                }
+                                else if (user.role == "user")
+                                {
+                                    // Tampilkan form user
+                                    Form2 userForm = new Form2(user);
+                                    userForm.Show();
+                                }
+                                this.Hide();
+                            }
+                            else
+                            {
+                                // Jika login gagal, tampilkan pesan kesalahan
+                                MessageBox.Show("Username atau password salah.");
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    if (username_akun == "" || password == "")
+                    if (username == "" || password == "")
                     {
-                        label13.Show();
-                        MessageBox.Show("Fill Usernsme or password");
+                        if (username == " " && password == "")
+                        {
+                            label13.Show();
+                            label4.Show();
+                            MessageBox.Show("Fill Usernsme and password");
+                            return;
+                        }
+                        else if (username == "")
+                        {
+                            label13.Show();
+                            MessageBox.Show("Fill Usernsme");
+                            return;
+                        }
+                        else
+                        {
+                            label4.Show();
+                            MessageBox.Show("Fill Password");
+                            return;
+                        }
+
+                    }
+                    else if (!name && !pass)
+                    {
+                        MessageBox.Show("Login Failed, Username and Password is wrong");
+                        return;
                     }
                     else if (!name)
                     {
                         MessageBox.Show("Login Failed, Username is wrong");
+                        return;
+
                     }
-                    else if (!pass)
+                    else
                     {
                         MessageBox.Show("Login Failed, Password is wrong");
-
-                    }
-                }
-
-                static string GetSHA256Hash(string input)
-                {
-                    using (SHA256 sha256 = SHA256.Create())
-                    {
-                        byte[] bytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
-                        return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+                        return;
                     }
                 }
 
                 static bool AuthenticateData(string username_akun, string password_akun)
                 {
-                    string connectionString = "Server=localhost; Port =5432; user id=postgres; Password=Yus2064.; Database=jecation;";
+                    string connectionString = "Server=localhost; Port =5432; user id=postgres; Password=; Database=jecation;";
                     using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                     {
                         connection.Open();
@@ -160,7 +305,7 @@ namespace FIX_LOGIN_REGISTER
 
                 static bool AuthenticateUser(string username_akun)
                 {
-                    string connectionString = "Server=localhost; Port =5432; user id=postgres; Password=Yus2064.; Database=jecation;";
+                    string connectionString = "Server=localhost; Port =5432; user id=postgres; Password=; Database=jecation;";
                     using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                     {
                         connection.Open();
@@ -178,7 +323,7 @@ namespace FIX_LOGIN_REGISTER
 
                 static bool AuthenticatePass(string password_akun)
                 {
-                    string connectionString = "Server=localhost; Port =5432; user id=postgres; Password=Yus2064.; Database=jecation;";
+                    string connectionString = "Server=localhost; Port =5432; user id=postgres; Password=; Database=jecation;";
                     using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                     {
                         connection.Open();
@@ -193,18 +338,23 @@ namespace FIX_LOGIN_REGISTER
 
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occured: " + ex.Message);
-            }
-        }
+                static string GetSHA256Hash(string input)
+                {
+                    using (SHA256 sha256 = SHA256.Create())
+                    {
+                        byte[] bytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
+                        return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+                    }
 
-        private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Sign_Up daftar = new Sign_Up();
-            daftar.Show();
-            this.Hide();
+
+                }
+
+            }
+
         }
     }
 }
+
+
+
+

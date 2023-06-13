@@ -75,7 +75,7 @@ namespace FIX_LOGIN_REGISTER
             }
             try
             {
-                NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;Port=5432;Database=jecation;User Id=postgres;Password=Yus2064.;");
+                NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;Port=5432;Database=jecation;User Id=postgres;Password=;");
                 conn.Open();
                 NpgsqlCommand cmd = new NpgsqlCommand();
                 cmd.Connection = conn;

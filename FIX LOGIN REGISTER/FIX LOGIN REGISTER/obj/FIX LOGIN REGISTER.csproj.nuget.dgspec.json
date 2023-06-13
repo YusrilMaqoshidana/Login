@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\kuliah\\SEM 2\\PBO\\File Codingan\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER.csproj": {}
+    "E:\\pbo\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER.csproj": {}
   },
   "projects": {
-    "E:\\kuliah\\SEM 2\\PBO\\File Codingan\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER.csproj": {
+    "E:\\pbo\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\kuliah\\SEM 2\\PBO\\File Codingan\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER.csproj",
+        "projectUniqueName": "E:\\pbo\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER.csproj",
         "projectName": "FIX LOGIN REGISTER",
-        "projectPath": "E:\\kuliah\\SEM 2\\PBO\\File Codingan\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER.csproj",
-        "packagesPath": "C:\\Users\\yusri\\.nuget\\packages\\",
-        "outputPath": "E:\\kuliah\\SEM 2\\PBO\\File Codingan\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\obj\\",
+        "projectPath": "E:\\pbo\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER.csproj",
+        "packagesPath": "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\",
+        "outputPath": "E:\\pbo\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\yusri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Raka Daneshwara\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -48,9 +53,17 @@
               "target": "Package",
               "version": "[2.0.4.4, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.31.0, )"
+            },
             "Npgsql": {
               "target": "Package",
               "version": "[7.0.4, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.31.0, )"
             }
           },
           "imports": [
@@ -72,7 +85,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

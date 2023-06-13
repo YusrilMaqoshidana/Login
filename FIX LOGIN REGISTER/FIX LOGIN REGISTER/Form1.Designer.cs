@@ -49,7 +49,7 @@
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Font = new Font("Montserrat", 14F, FontStyle.Regular, GraphicsUnit.Point);
             textBox1.ForeColor = Color.FromArgb(64, 64, 64);
-            textBox1.Location = new Point(1204, 374);
+            textBox1.Location = new Point(1204, 373);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(469, 29);
             textBox1.TabIndex = 0;
@@ -63,7 +63,7 @@
             textBox2.BorderStyle = BorderStyle.None;
             textBox2.Font = new Font("Montserrat", 14F, FontStyle.Regular, GraphicsUnit.Point);
             textBox2.ForeColor = Color.FromArgb(64, 64, 64);
-            textBox2.Location = new Point(1204, 460);
+            textBox2.Location = new Point(1204, 459);
             textBox2.Name = "textBox2";
             textBox2.PasswordChar = '*';
             textBox2.Size = new Size(469, 29);
@@ -80,7 +80,7 @@
             label1.ForeColor = Color.Gray;
             label1.Location = new Point(1204, 371);
             label1.Name = "label1";
-            label1.Size = new Size(139, 33);
+            label1.Size = new Size(141, 33);
             label1.TabIndex = 2;
             label1.Text = "Username";
             label1.Click += label1_Click;
@@ -122,7 +122,7 @@
             label3.Font = new Font("Montserrat", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(1340, 960);
             label3.Name = "label3";
-            label3.Size = new Size(189, 24);
+            label3.Size = new Size(191, 24);
             label3.TabIndex = 7;
             label3.Text = "Don't Have Account?";
             // 

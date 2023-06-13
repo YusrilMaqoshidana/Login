@@ -1,16 +1,29 @@
 {
   "version": 2,
-  "dgSpecHash": "zuOgqaZUCSuPcPx5t3eOq1A/I3vp+lgpk27pADLruRysGaxYq0LoyTh/fFtAsoi1Dxo45k27wahvUDkvGdWgsA==",
+  "dgSpecHash": "/XiKmHDXWNtiK3S4LAhAqHxxEQANveIKe9y6kKecRqG20YUJ7Qfp281o/jsG98NlPBemFG4frryVeKv6hrMxsw==",
   "success": true,
-  "projectFilePath": "E:\\kuliah\\SEM 2\\PBO\\File Codingan\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER.csproj",
+  "projectFilePath": "E:\\pbo\\Login\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER\\FIX LOGIN REGISTER.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\yusri\\.nuget\\packages\\guna.charts.winforms\\1.0.8\\guna.charts.winforms.1.0.8.nupkg.sha512",
-    "C:\\Users\\yusri\\.nuget\\packages\\guna.ui2.winforms\\2.0.4.4\\guna.ui2.winforms.2.0.4.4.nupkg.sha512",
-    "C:\\Users\\yusri\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\yusri\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
-    "C:\\Users\\yusri\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
-    "C:\\Users\\yusri\\.nuget\\packages\\system.management\\6.0.0\\system.management.6.0.0.nupkg.sha512",
-    "C:\\Users\\yusri\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\guna.charts.winforms\\1.0.8\\guna.charts.winforms.1.0.8.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\guna.ui2.winforms\\2.0.4.4\\guna.ui2.winforms.2.0.4.4.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\microsoft.identitymodel.abstractions\\6.31.0\\microsoft.identitymodel.abstractions.6.31.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\6.31.0\\microsoft.identitymodel.jsonwebtokens.6.31.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\microsoft.identitymodel.logging\\6.31.0\\microsoft.identitymodel.logging.6.31.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.31.0\\microsoft.identitymodel.tokens.6.31.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.31.0\\system.identitymodel.tokens.jwt.6.31.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\system.management\\6.0.0\\system.management.6.0.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\system.text.encodings.web\\4.7.2\\system.text.encodings.web.4.7.2.nupkg.sha512",
+    "C:\\Users\\Raka Daneshwara\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
   ],
   "logs": []
 }
